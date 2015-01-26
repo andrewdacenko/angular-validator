@@ -1,4 +1,4 @@
-# angular-validator
+# ng-validator
 Validation helper class
 
 # How to use
