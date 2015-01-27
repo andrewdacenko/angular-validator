@@ -1,5 +1,10 @@
 # ng-validator
-Validation helper class
+Angular validation helper class
+
+# How to install
+```sh 
+bower install ng-validator --save
+```
 
 # How to use
 
