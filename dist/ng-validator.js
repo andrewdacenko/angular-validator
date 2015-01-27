@@ -1,6 +1,6 @@
 /**
  * Angular validation helper class
- * @version v0.0.1
+ * @version v0.0.2
  * @link https://github.com/andrewdacenko/ng-validator
  * @license MIT
  */
