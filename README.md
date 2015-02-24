@@ -89,9 +89,13 @@ function inputValidation() {
 Create template
 ```html
 <div class="form-group" ng-class="{'has-error': parent.errors[field]}">
-  <label class="form-label">{{ field }}</label>
-  <input class="form-control" ng-model="parent.input[field]" ng-change="parent.errors[field] = null" />
-  <span class="help-block" ng-if="parent.errors[field]" ng-bind="parent.errors[field]">
+  <label class="form-label" ng-bind="field"></label>
+  <input class="form-control" 
+         ng-model="parent.input[field]" 
+         ng-change="parent.errors[field] = null" />
+  <span class="help-block" 
+        ng-if="parent.errors[field]" 
+        ng-bind="parent.errors[field]">
 </div>
 ```
 
