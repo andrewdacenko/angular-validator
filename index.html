@@ -43,90 +43,93 @@
 
 <p>Include it as dependency </p>
 
-<div class="highlight highlight-javascript"><pre>angular.module(<span class="pl-s1"><span class="pl-pds">'</span>myApp<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>ngValidator<span class="pl-pds">'</span></span>]);</pre></div>
+<div class="highlight highlight-javascript"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'myApp'</span><span class="p">,</span> <span class="p">[</span><span class="s1">'ngValidator'</span><span class="p">]);</span></pre></div>
 
 <p>Inject in Controller / Service / Whatever </p>
 
-<div class="highlight highlight-javascript"><pre>AppController.$inject <span class="pl-k">=</span> [<span class="pl-s1"><span class="pl-pds">'</span>Validator<span class="pl-pds">'</span></span>];
+<div class="highlight highlight-javascript"><pre><span class="nx">AppController</span><span class="p">.</span><span class="nx">$inject</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Validator'</span><span class="p">];</span>
 
-<span class="pl-st">function</span> <span class="pl-en">AppController</span> (<span class="pl-vpf">Validator</span>) {
-  <span class="pl-s">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
+<span class="kd">function</span> <span class="nx">AppController</span> <span class="p">(</span><span class="nx">Validator</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
 
-  self.<span class="pl-sc">input</span> <span class="pl-k">=</span> {
-    title<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>,
-    description<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>,
-    agree<span class="pl-k">:</span> <span class="pl-c1">null</span>,
-    reason<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
-  };
+  <span class="nx">self</span><span class="p">.</span><span class="nx">input</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
+    <span class="nx">description</span><span class="o">:</span> <span class="s1">''</span><span class="p">,</span>
+    <span class="nx">agree</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">reason</span><span class="o">:</span> <span class="s1">''</span>
+  <span class="p">};</span>
 
-  self.errors <span class="pl-k">=</span> {};
+  <span class="nx">self</span><span class="p">.</span><span class="nx">errors</span> <span class="o">=</span> <span class="p">{};</span>
 
-  self.submit <span class="pl-k">=</span> submit;
+  <span class="nx">self</span><span class="p">.</span><span class="nx">submit</span> <span class="o">=</span> <span class="nx">submit</span><span class="p">;</span>
 
-  <span class="pl-s">var</span> rules <span class="pl-k">=</span> {
-    title<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>required<span class="pl-pds">'</span></span>,
-    description<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>required_with:title<span class="pl-pds">'</span></span>,
-    agree<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>required<span class="pl-pds">'</span></span>,
-    reason<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>required_with:title|required_if:agree,0<span class="pl-pds">'</span></span>
-  }
+  <span class="kd">var</span> <span class="nx">rules</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">title</span><span class="o">:</span> <span class="s1">'required'</span><span class="p">,</span>
+    <span class="nx">description</span><span class="o">:</span> <span class="s1">'required_with:title'</span><span class="p">,</span>
+    <span class="nx">agree</span><span class="o">:</span> <span class="s1">'required'</span><span class="p">,</span>
+    <span class="nx">reason</span><span class="o">:</span> <span class="s1">'required_with:title|required_if:agree,0'</span>
+  <span class="p">}</span>
 
-  <span class="pl-s">var</span> customMessages <span class="pl-k">=</span> {
-    <span class="pl-s1"><span class="pl-pds">'</span>description.required_with<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>Field needs to be filled if title present<span class="pl-pds">'</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>reason.required_with<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>Please provide reason<span class="pl-pds">'</span></span>,
-    <span class="pl-s1"><span class="pl-pds">'</span>reason.required_if<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>Please provide reason<span class="pl-pds">'</span></span>,
-  }
+  <span class="kd">var</span> <span class="nx">customMessages</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'description.required_with'</span><span class="o">:</span> <span class="s1">'Field needs to be filled if title present'</span><span class="p">,</span>
+    <span class="s1">'reason.required_with'</span><span class="o">:</span> <span class="s1">'Please provide reason'</span><span class="p">,</span>
+    <span class="s1">'reason.required_if'</span><span class="o">:</span> <span class="s1">'Please provide reason'</span><span class="p">,</span>
+  <span class="p">}</span>
 
-  <span class="pl-st">function</span> <span class="pl-en">submit</span>() {
-    self.errors <span class="pl-k">=</span> {};
+  <span class="kd">function</span> <span class="nx">submit</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">self</span><span class="p">.</span><span class="nx">errors</span> <span class="o">=</span> <span class="p">{};</span>
 
-    <span class="pl-s">var</span> validator <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Validator</span>(self.<span class="pl-sc">input</span>, rules, customMessages);
+    <span class="kd">var</span> <span class="nx">validator</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Validator</span><span class="p">(</span><span class="nx">self</span><span class="p">.</span><span class="nx">input</span><span class="p">,</span> <span class="nx">rules</span><span class="p">,</span> <span class="nx">customMessages</span><span class="p">);</span>
 
-    <span class="pl-k">if</span> (validator.fails()) {
-      <span class="pl-k">for</span> (<span class="pl-s">var</span> field <span class="pl-k">in</span> validator.errors.<span class="pl-sc">all</span>()) {
-          self.errors[field] <span class="pl-k">=</span> validator.errors.first(field);
-      };  
-    }
-  }
-}</pre></div>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">validator</span><span class="p">.</span><span class="nx">fails</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">field</span> <span class="k">in</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">all</span><span class="p">())</span> <span class="p">{</span>
+          <span class="nx">self</span><span class="p">.</span><span class="nx">errors</span><span class="p">[</span><span class="nx">field</span><span class="p">]</span> <span class="o">=</span> <span class="nx">validator</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">first</span><span class="p">(</span><span class="nx">field</span><span class="p">);</span>
+      <span class="p">};</span>  
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
 
 <p>Show errors in template</p>
 
-<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">ng-controller</span>=<span class="pl-s1"><span class="pl-pds">"</span>AppController as app<span class="pl-pds">"</span></span>&gt;
-  &lt;<span class="pl-ent">form</span> <span class="pl-e">ng-submit</span>=<span class="pl-s1"><span class="pl-pds">"</span>app.submit()<span class="pl-pds">"</span></span>&gt;
-    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>form-group<span class="pl-pds">"</span></span> <span class="pl-e">ng-class</span>=<span class="pl-s1"><span class="pl-pds">"</span>{'has-error': app.errors.title}<span class="pl-pds">"</span></span>&gt;
-      &lt;<span class="pl-ent">label</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>form-label<span class="pl-pds">"</span></span>&gt;Title&lt;/<span class="pl-ent">label</span>&gt;
-      &lt;<span class="pl-ent">input</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>form-control<span class="pl-pds">"</span></span> <span class="pl-e">ng-model</span>=<span class="pl-s1"><span class="pl-pds">"</span>app.input.title<span class="pl-pds">"</span></span> /&gt;
-      &lt;<span class="pl-ent">span</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>help-block<span class="pl-pds">"</span></span> <span class="pl-e">ng-if</span>=<span class="pl-s1"><span class="pl-pds">"</span>app.errors.title<span class="pl-pds">"</span></span> <span class="pl-e">ng-bind</span>=<span class="pl-s1"><span class="pl-pds">"</span>app.errors.title<span class="pl-pds">"</span></span>&gt;
-    &lt;/<span class="pl-ent">div</span>&gt;
-    &lt;<span class="pl-ent">button</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>btn btn-primary<span class="pl-pds">"</span></span>&gt;Submit&lt;/<span class="pl-ent">button</span>&gt;
-  &lt;/<span class="pl-ent">form</span>&gt;
-&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;div</span> <span class="na">ng-controller=</span><span class="s">"AppController as app"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;form</span> <span class="na">ng-submit=</span><span class="s">"app.submit()"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"form-group"</span> <span class="na">ng-class=</span><span class="s">"{'has-error': app.errors.title}"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;label</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>Title<span class="nt">&lt;/label&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">ng-model=</span><span class="s">"app.input.title"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"help-block"</span> <span class="na">ng-if=</span><span class="s">"app.errors.title"</span> <span class="na">ng-bind=</span><span class="s">"app.errors.title"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>Submit<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
 
 <p>Or wrap it in simple directive</p>
 
-<div class="highlight highlight-javascript"><pre>angular
-  .module(<span class="pl-s1"><span class="pl-pds">'</span>myApp<span class="pl-pds">'</span></span>)
-  .directive(<span class="pl-s1"><span class="pl-pds">'</span>inputValidation<span class="pl-pds">'</span></span>, inputValidation);
+<div class="highlight highlight-javascript"><pre><span class="nx">angular</span>
+  <span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'myApp'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">directive</span><span class="p">(</span><span class="s1">'inputValidation'</span><span class="p">,</span> <span class="nx">inputValidation</span><span class="p">);</span>
 
-<span class="pl-st">function</span> <span class="pl-en">inputValidation</span>() {
-  <span class="pl-k">return</span> {
-    restrict<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>E<span class="pl-pds">'</span></span>,
-    scope<span class="pl-k">:</span> {
-      field<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>@<span class="pl-pds">'</span></span>,
-      parent<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>=<span class="pl-pds">'</span></span>
-    },
-    template<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>&lt;div class="form-group" ng-class="{<span class="pl-cce">\'</span>has-error<span class="pl-cce">\'</span>: parent.errors[field]}"&gt;<span class="pl-pds">'</span></span> <span class="pl-k">+</span>
-              <span class="pl-s1"><span class="pl-pds">'</span>  &lt;label class="form-label"&gt;{{ field | uppercase }}&lt;/label&gt;<span class="pl-pds">'</span></span> <span class="pl-k">+</span>
-              <span class="pl-s1"><span class="pl-pds">'</span>  &lt;input class="form-control" ng-model="parent.input[field]" ng-change="parent.errors[field] = null" /&gt;<span class="pl-pds">'</span></span> <span class="pl-k">+</span>
-              <span class="pl-s1"><span class="pl-pds">'</span>  &lt;span class="help-block" ng-if="parent.errors[field]" ng-bind="parent.errors[field]"&gt;<span class="pl-pds">'</span></span> <span class="pl-k">+</span>
-              <span class="pl-s1"><span class="pl-pds">'</span>&lt;/div&gt;<span class="pl-pds">'</span></span>,
-    <span class="pl-en">link</span>: <span class="pl-st">function</span> (<span class="pl-vpf">scope</span>, <span class="pl-vpf">elem</span>, <span class="pl-vpf">attr</span>) {}
-  }
-};</pre></div>
+<span class="kd">function</span> <span class="nx">inputValidation</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="nx">restrict</span><span class="o">:</span> <span class="s1">'E'</span><span class="p">,</span>
+    <span class="nx">scope</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">field</span><span class="o">:</span> <span class="s1">'@'</span><span class="p">,</span>
+      <span class="nx">parent</span><span class="o">:</span> <span class="s1">'='</span>
+    <span class="p">},</span>
+    <span class="nx">template</span><span class="o">:</span> <span class="s1">'&lt;div class="form-group" ng-class="{\'has-error\': parent.errors[field]}"&gt;'</span> <span class="o">+</span>
+              <span class="s1">'  &lt;label class="form-label"&gt;{{ field | uppercase }}&lt;/label&gt;'</span> <span class="o">+</span>
+              <span class="s1">'  &lt;input class="form-control" ng-model="parent.input[field]" ng-change="parent.errors[field] = null" /&gt;'</span> <span class="o">+</span>
+              <span class="s1">'  &lt;span class="help-block" ng-if="parent.errors[field]" ng-bind="parent.errors[field]"&gt;'</span> <span class="o">+</span>
+              <span class="s1">'&lt;/div&gt;'</span><span class="p">,</span>
+    <span class="nx">link</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">elem</span><span class="p">,</span> <span class="nx">attr</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
 
 <p>And use as</p>
 
-<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">input</span><span class="pl-e">-validation</span> <span class="pl-e">parent</span>=<span class="pl-s1"><span class="pl-pds">"</span>app<span class="pl-pds">"</span></span> <span class="pl-e">field</span>=<span class="pl-s1"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">input</span><span class="pl-e">-validation</span>&gt;</pre></div>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;input-validation</span> <span class="na">parent=</span><span class="s">"app"</span> <span class="na">field=</span><span class="s">"title"</span><span class="nt">&gt;&lt;/input-validation&gt;</span></pre></div>
         </section>
 
         <aside id="sidebar">
