@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>ng-validator by andrewdacenko</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>ng-validator</h1>
+        <h2>Angular validation helper class</h2>
+        <a href="https://github.com/andrewdacenko/ng-validator" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="ng-validator" class="anchor" href="#ng-validator" aria-hidden="true"><span class="octicon octicon-link"></span></a>ng-validator</h1>
+
+<p>Angular validation helper class</p>
+
+<h1>
+<a id="how-to-install" class="anchor" href="#how-to-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to install</h1>
+
+<div class="highlight highlight-sh"><pre>bower install ng-validator --save</pre></div>
+
+<h1>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use</h1>
+
+<p>Include it as dependency </p>
+
+<div class="highlight highlight-javascript"><pre>angular.module(<span class="pl-s1"><span class="pl-pds">'</span>myApp<span class="pl-pds">'</span></span>, [<span class="pl-s1"><span class="pl-pds">'</span>ngValidator<span class="pl-pds">'</span></span>]);</pre></div>
+
+<p>Inject in Controller / Service / Whatever </p>
+
+<div class="highlight highlight-javascript"><pre>AppController.$inject <span class="pl-k">=</span> [<span class="pl-s1"><span class="pl-pds">'</span>Validator<span class="pl-pds">'</span></span>];
+
+<span class="pl-st">function</span> <span class="pl-en">AppController</span> (<span class="pl-vpf">Validator</span>) {
+  <span class="pl-s">var</span> self <span class="pl-k">=</span> <span class="pl-v">this</span>;
+
+  self.<span class="pl-sc">input</span> <span class="pl-k">=</span> {
+    title<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>,
+    description<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>,
+    agree<span class="pl-k">:</span> <span class="pl-c1">null</span>,
+    reason<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+  };
+
+  self.errors <span class="pl-k">=</span> {};
+
+  self.submit <span class="pl-k">=</span> submit;
+
+  <span class="pl-s">var</span> rules <span class="pl-k">=</span> {
+    title<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>required<span class="pl-pds">'</span></span>,
+    description<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>required_with:title<span class="pl-pds">'</span></span>,
+    agree<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>required<span class="pl-pds">'</span></span>,
+    reason<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>required_with:title|required_if:agree,0<span class="pl-pds">'</span></span>
+  }
+
+  <span class="pl-s">var</span> customMessages <span class="pl-k">=</span> {
+    <span class="pl-s1"><span class="pl-pds">'</span>description.required_with<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>Field needs to be filled if title present<span class="pl-pds">'</span></span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>reason.required_with<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>Please provide reason<span class="pl-pds">'</span></span>,
+    <span class="pl-s1"><span class="pl-pds">'</span>reason.required_if<span class="pl-pds">'</span></span><span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>Please provide reason<span class="pl-pds">'</span></span>,
+  }
+
+  <span class="pl-st">function</span> <span class="pl-en">submit</span>() {
+    self.errors <span class="pl-k">=</span> {};
+
+    <span class="pl-s">var</span> validator <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Validator</span>(self.<span class="pl-sc">input</span>, rules, customMessages);
+
+    <span class="pl-k">if</span> (validator.fails()) {
+      <span class="pl-k">for</span> (<span class="pl-s">var</span> field <span class="pl-k">in</span> validator.errors.<span class="pl-sc">all</span>()) {
+          self.errors[field] <span class="pl-k">=</span> validator.errors.first(field);
+      };  
+    }
+  }
+}</pre></div>
+
+<p>Show errors in template</p>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">ng-controller</span>=<span class="pl-s1"><span class="pl-pds">"</span>AppController as app<span class="pl-pds">"</span></span>&gt;
+  &lt;<span class="pl-ent">form</span> <span class="pl-e">ng-submit</span>=<span class="pl-s1"><span class="pl-pds">"</span>app.submit()<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>form-group<span class="pl-pds">"</span></span> <span class="pl-e">ng-class</span>=<span class="pl-s1"><span class="pl-pds">"</span>{'has-error': app.errors.title}<span class="pl-pds">"</span></span>&gt;
+      &lt;<span class="pl-ent">label</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>form-label<span class="pl-pds">"</span></span>&gt;Title&lt;/<span class="pl-ent">label</span>&gt;
+      &lt;<span class="pl-ent">input</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>form-control<span class="pl-pds">"</span></span> <span class="pl-e">ng-model</span>=<span class="pl-s1"><span class="pl-pds">"</span>app.input.title<span class="pl-pds">"</span></span> /&gt;
+      &lt;<span class="pl-ent">span</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>help-block<span class="pl-pds">"</span></span> <span class="pl-e">ng-if</span>=<span class="pl-s1"><span class="pl-pds">"</span>app.errors.title<span class="pl-pds">"</span></span> <span class="pl-e">ng-bind</span>=<span class="pl-s1"><span class="pl-pds">"</span>app.errors.title<span class="pl-pds">"</span></span>&gt;
+    &lt;/<span class="pl-ent">div</span>&gt;
+    &lt;<span class="pl-ent">button</span> <span class="pl-e">class</span>=<span class="pl-s1"><span class="pl-pds">"</span>btn btn-primary<span class="pl-pds">"</span></span>&gt;Submit&lt;/<span class="pl-ent">button</span>&gt;
+  &lt;/<span class="pl-ent">form</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+<p>Or wrap it in simple directive</p>
+
+<div class="highlight highlight-javascript"><pre>angular
+  .module(<span class="pl-s1"><span class="pl-pds">'</span>myApp<span class="pl-pds">'</span></span>)
+  .directive(<span class="pl-s1"><span class="pl-pds">'</span>inputValidation<span class="pl-pds">'</span></span>, inputValidation);
+
+<span class="pl-st">function</span> <span class="pl-en">inputValidation</span>() {
+  <span class="pl-k">return</span> {
+    restrict<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>E<span class="pl-pds">'</span></span>,
+    scope<span class="pl-k">:</span> {
+      field<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>@<span class="pl-pds">'</span></span>,
+      parent<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>=<span class="pl-pds">'</span></span>
+    },
+    template<span class="pl-k">:</span> <span class="pl-s1"><span class="pl-pds">'</span>&lt;div class="form-group" ng-class="{<span class="pl-cce">\'</span>has-error<span class="pl-cce">\'</span>: parent.errors[field]}"&gt;<span class="pl-pds">'</span></span> <span class="pl-k">+</span>
+              <span class="pl-s1"><span class="pl-pds">'</span>  &lt;label class="form-label"&gt;{{ field | uppercase }}&lt;/label&gt;<span class="pl-pds">'</span></span> <span class="pl-k">+</span>
+              <span class="pl-s1"><span class="pl-pds">'</span>  &lt;input class="form-control" ng-model="parent.input[field]" ng-change="parent.errors[field] = null" /&gt;<span class="pl-pds">'</span></span> <span class="pl-k">+</span>
+              <span class="pl-s1"><span class="pl-pds">'</span>  &lt;span class="help-block" ng-if="parent.errors[field]" ng-bind="parent.errors[field]"&gt;<span class="pl-pds">'</span></span> <span class="pl-k">+</span>
+              <span class="pl-s1"><span class="pl-pds">'</span>&lt;/div&gt;<span class="pl-pds">'</span></span>,
+    <span class="pl-en">link</span>: <span class="pl-st">function</span> (<span class="pl-vpf">scope</span>, <span class="pl-vpf">elem</span>, <span class="pl-vpf">attr</span>) {}
+  }
+};</pre></div>
+
+<p>And use as</p>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">input</span><span class="pl-e">-validation</span> <span class="pl-e">parent</span>=<span class="pl-s1"><span class="pl-pds">"</span>app<span class="pl-pds">"</span></span> <span class="pl-e">field</span>=<span class="pl-s1"><span class="pl-pds">"</span>title<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">input</span><span class="pl-e">-validation</span>&gt;</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/andrewdacenko/ng-validator/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/andrewdacenko/ng-validator/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/andrewdacenko/ng-validator"></a> is maintained by <a href="https://github.com/andrewdacenko">andrewdacenko</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
