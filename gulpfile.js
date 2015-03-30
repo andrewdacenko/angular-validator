@@ -41,7 +41,7 @@ gulp.task('uglify', ['clean'], function () {
         .pipe(header(banner, {
             pkg: pkg
         }))
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('dist'));
 });
 
