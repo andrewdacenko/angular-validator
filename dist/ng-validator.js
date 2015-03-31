@@ -135,8 +135,8 @@ angular
             "required_without": "The :attribute field is required when :values is not present.",
             "required_without_all": "The :attribute field is required when none of :values are present.",
 
-            // Developers can set custom validation messages on some attributes
-            // validation rules
+            // Developers can set custom validation messages on some
+            // attributes validation rules
             "custom": {
                 "attribute-name": {
                     "rule-name": "custom-message",
@@ -148,8 +148,8 @@ angular
                 "email": "Email address",
             },
 
-            // As an example just set displayable value for colors attribute and
-            // its values
+            // As an example just set displayable value for colors attribute
+            // and its values
             "values": {
                 "colors": {
                     "F00": "Red",
@@ -167,6 +167,7 @@ angular
              * @param  {String}  key
              * @param  {Object}  parameters
              * @param  {String}  locale
+             *
              * @return {String}
              */
             this.trans = function trans(key, parameters, locale) {
@@ -182,6 +183,7 @@ angular
              * @param  {String}  key
              * @param  {Object}  replace
              * @param  {String}  locale
+             *
              * @return {String}
              */
             this.get = function get(key, replace, locale) {
@@ -211,6 +213,7 @@ angular
              * @param  {String}  locale
              * @param  {String}  key
              * @param  {Object}  replace
+             *
              * @return {String|undefined}
              */
             this.getMessage = function getMessage(locale, key, replace) {
@@ -240,6 +243,7 @@ angular
              * Get the array of locales to be checked.
              *
              * @param  {String|null}  locale
+             *
              * @return {Array}
              */
             this.parseLocale = function parseLocale(locale) {
@@ -262,11 +266,12 @@ angular
             /**
              * Create a new Validator instance with `new Validator(...args)`.
              *
-             * @param {Object} data           Data to be validated
-             * @param {Object} rules          Set of rules
-             * @param {Object} customMessages Custom messages
-             * @param {Object} customAttributes   Custom messages
-             * @return {Validator}            Validator
+             * @param {Object} data             Data to be validated
+             * @param {Object} rules            Set of rules
+             * @param {Object} customMessages   Custom messages
+             * @param {Object} customAttributes Custom messages
+             *
+             * @return {Validator} Validator
              */
             function Validator(data, rules, customMessages, customAttributes) {
                 this.data = data;
@@ -279,10 +284,11 @@ angular
              * Or create new validator instance by calling
              * Validator.make(...args).
              *
-             * @param {Object} data           Data to be validated
-             * @param {Object} rules          Set of rules
-             * @param {Object} customMessages Custom messages
-             * @param {Object} customAttributes   Custom messages
+             * @param {Object} data             Data to be validated
+             * @param {Object} rules            Set of rules
+             * @param {Object} customMessages   Custom messages
+             * @param {Object} customAttributes Custom messages
+             *
              * @return {Validator}            Validator
              */
             Validator.make = function (data, rules, customMessages, customAttributes) {
@@ -320,20 +326,21 @@ angular
             /**
              * The array of custom attribute names.
              *
-             * @attribute {Array}
+             * @attribute {Object}
              */
             Validator.prototype.customAttributes = {};
             /**
              * The array of custom displayabled values.
              *
-             * @attribute {Array}
+             * @attribute {Object}
              */
             Validator.prototype.customValues = {};
 
             /**
              * Explode the rules into an array of rules.
              *
-             * @param  {Object}  rules
+             * @param {Object} rules
+             *
              * @return {Object}
              */
             Validator.prototype.explodeRules = function (rules) {
@@ -347,7 +354,8 @@ angular
             /**
              * Extract the rule name and parameters from a rule.
              *
-             * @param  {Array|String}  rules
+             * @param {Array|String} rules
+             *
              * @return {Object}
              */
             Validator.prototype.parseRule = function (rules) {
@@ -361,7 +369,8 @@ angular
             /**
              * Parse an array based rule.
              *
-             * @param  {Array}  rules
+             * @param {Array} rules
+             *
              * @return {Object}
              */
             Validator.prototype.parseArrayRule = function (rules) {
@@ -374,14 +383,16 @@ angular
             /**
              * Parse a string based rule.
              *
-             * @param  {String}  rules
+             * @param {String} rules
+             *
              * @return {Array}
              */
             Validator.prototype.parseStringRule = function (rules) {
                 var parameters = [];
 
-                // The format for specifying validation rules and parameters follows an
-                // easy {rule}:{parameters} formatting convention. For instance the
+                // The format for specifying validation rules and parameters
+                // follows an easy {rule}:{parameters} formatting convention.
+                // For instance the
                 if (rules.indexOf(':') !== -1) {
                     var list = rules.split(':');
                     rules = list[0];
@@ -397,8 +408,9 @@ angular
             /**
              * Parse a parameter list.
              *
-             * @param  {String}   rule
-             * @param  {String}   parameter
+             * @param {String} rule
+             * @param {String} parameter
+             *
              * @return {Array}
              */
             Validator.prototype.parseParameters = function (rule, parameter) {
@@ -409,9 +421,10 @@ angular
             /**
              * Validate a given attribute against a rule.
              *
-             * @param  {String}   attribute
-             * @param  {String}   rule
-             * @return {Void}
+             * @param {String} attribute
+             * @param {String} rule
+             *
+             * @return {undefined}
              */
             Validator.prototype.validate = function (attribute, rule) {
                 var parsed = this.parseRule(rule);
@@ -457,9 +470,10 @@ angular
             /**
              * Register a custom validator rule.
              *
-             * @param  {String}    rule
-             * @param  {Function}  fn
-             * @param  {String}    message
+             * @param {String}   rule
+             * @param {Function} fn
+             * @param {String}   message
+             *
              * @return {Void}
              */
             Validator.extend = function (rule, fn, message) {
@@ -471,9 +485,10 @@ angular
             /**
              * Add a failed rule and error message to the collection.
              *
-             * @param  {String}   attribute
-             * @param  {String}   rule
-             * @param  {Array}    parameters
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {Void}
              */
             Validator.prototype.addFailure = function (attribute, rule, parameters) {
@@ -487,8 +502,9 @@ angular
             /**
              * Get the validation message for an attribute and rule.
              *
-             * @param  {String}   attribute
-             * @param  {String}   rule
+             * @param {String} attribute
+             * @param {String} rule
+             *
              * @return {String}
              */
             Validator.prototype.getMessage = function (attribute, rule) {
@@ -509,16 +525,17 @@ angular
                 var customMessage = ValidationTranslator.trans(customKey);
 
                 // Than we check for a custom defined validation message for
-                // the attribute and rule. This allows the developer to specify
-                // specific messages for only some attributes and rules that need
-                // to get specially formed.
+                // the attribute and rule. This allows the developer to
+                // specify specific messages for only some attributes and
+                // rules that need to get specially formed.
                 if (customMessage !== customKey) {
                     return customMessage;
                 }
 
-                // If the rule being validated is a "size" rule, we will need to gather the
-                // specific error message for the type of attribute being validated such
-                // as a number, file or string which all have different message types.
+                // If the rule being validated is a "size" rule, we will need
+                // to gather the specific error message for the type of
+                // attribute being validated such as a number, file or string
+                // which all have different message types.
                 else if (this.sizeRules.indexOf(rule) !== -1) {
                     return this.getSizeMessage(attribute, rule);
                 };
@@ -539,9 +556,10 @@ angular
             /**
              * Get the inmessage message for a rule if it exists.
              *
-             * @param  {String}   attribute
-             * @param  {String}   lowerRule
-             * @param  {Array}    source
+             * @param {String} attribute
+             * @param {String} lowerRule
+             * @param {Array}  source
+             *
              * @return {String}
              */
             Validator.prototype.getInlineMessage = function (attribute, lowerRule, source) {
@@ -549,9 +567,9 @@ angular
                 var keys = [attribute + '.' + lowerRule, studlyCase(lowerRule)];
 
                 // First we will check for a custom message for an attribute
-                // specific rule message for the attributes, then we will check
-                // for a general custom message that is not attribute specific. If
-                // we find either we'll return it.
+                // specific rule message for the attributes, then we will
+                // check for a general custom message that is not attribute
+                // specific. If we find either we'll return it.
                 for (var key in keys) {
                     if (messages[keys[key]] !== undefined) return messages[keys[key]];
                 }
@@ -560,16 +578,17 @@ angular
             /**
              * Get the proper error message for an attribute and size rule.
              *
-             * @param  {String}  attribute
-             * @param  {String}  rule
+             * @param {String} attribute
+             * @param {String} rule
+             *
              * @return {String}
              */
             Validator.prototype.getSizeMessage = function (attribute, rule) {
                 var lowerRule = snakeCase(rule);
                 // There are three different types of size validations. The
-                // attribute may be either a number, file, or string so we will
-                // check a few things to know which type of value it is and
-                // return the correct line for that type.
+                // attribute may be either a number, file, or string so we
+                // will check a few things to know which type of value it is
+                // and return the correct line for that type.
                 var type = this.getAttributeType(attribute);
 
                 var key = [lowerRule, '.', type].join('');
@@ -580,10 +599,11 @@ angular
             /**
              * Replace all error message place-holders with actual values.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.doReplacements = function (message, attribute, rule, parameters) {
@@ -601,7 +621,8 @@ angular
             /**
              * Get the value of a given attribute.
              *
-             * @param  {String}   attribute
+             * @param {String} attribute
+             *
              * @return {Mixed}
              */
             Validator.prototype.getValue = function (attribute) {
@@ -611,7 +632,8 @@ angular
             /**
              * Determine if any of the given attributes fail the required test.
              *
-             * @param  {Array}  attributes
+             * @param {Array} attributes
+             *
              * @return {Boolean}
              */
             Validator.prototype.anyFailingRequired = function (attributes) {
@@ -627,7 +649,8 @@ angular
             /**
              * Determine if all of the given attributes fail the required test.
              *
-             * @param  {Array}    attributes
+             * @param {Array} attributes
+             *
              * @return {Boolean}
              */
             Validator.prototype.allRequiredFails = function (attributes) {
@@ -643,8 +666,9 @@ angular
             /**
              * Validate that a required attribute exists.
              *
-             * @param  {String}   attribute
-             * @param  {Mixed}    value
+             * @param {String} attribute
+             * @param {Mixed}  value
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateRequired = function (attribute, value) {
@@ -668,11 +692,13 @@ angular
             };
 
             /**
-             * Validate that an attribute exists when any other attribute exists.
+             * Validate that an attribute exists when any other attribute
+             * exists.
              *
-             * @param  {String}   attribute
-             * @param  {Mixed}    value
-             * @param  {Array}    parameters
+             * @param {String} attribute
+             * @param {Mixed}  value
+             * @param {Array}  parameters
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateRequiredWith = function (attribute, value, parameters) {
@@ -684,11 +710,13 @@ angular
             };
 
             /**
-             * Validate that an attribute exists when all other attributes exists.
+             * Validate that an attribute exists when all other attributes
+             * exists.
              *
-             * @param  {String}  attribute
-             * @param  {Mixed}   value
-             * @param  {Mixed}   parameters
+             * @param {String} attribute
+             * @param {Mixed}  value
+             * @param {Mixed}  parameters
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateRequiredWithAll = function (attribute, value, parameters) {
@@ -700,11 +728,13 @@ angular
             };
 
             /**
-             * Validate that an attribute exists when another attribute does not.
+             * Validate that an attribute exists when another attribute does
+             * not.
              *
-             * @param  {String}  attribute
-             * @param  {Mixed}   value
-             * @param  {Mixed}   parameters
+             * @param {String} attribute
+             * @param {Mixed}  value
+             * @param {Mixed}  parameters
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateRequiredWithout = function (attribute, value, parameters) {
@@ -716,11 +746,13 @@ angular
             };
 
             /**
-             * Validate that an attribute exists when all other attributes do not.
+             * Validate that an attribute exists when all other attributes do
+             * not.
              *
-             * @param  {String}  attribute
-             * @param  {Mixed}   value
-             * @param  {Mixed}   parameters
+             * @param {String} attribute
+             * @param {Mixed}  value
+             * @param {Mixed}  parameters
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateRequiredWithoutAll = function (attribute, value, parameters) {
@@ -732,11 +764,13 @@ angular
             };
 
             /**
-             * Validate that an attribute exists when other attribute has certain value.
+             * Validate that an attribute exists when other attribute has
+             * certain value.
              *
-             * @param  {String}   attribute
-             * @param  {Mixed}    value
-             * @param  {Array}    parameters
+             * @param {String} attribute
+             * @param {Mixed}  value
+             * @param {Array}  parameters
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateRequiredIf = function (attribute, value, parameters) {
@@ -752,8 +786,9 @@ angular
              *
              * This validation rule implies the attribute is "required".
              *
-             * @param  {String}   attribute
-             * @param  {Mixed}    value
+             * @param {String} attribute
+             * @param {Mixed}  value
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateAccepted = function (attribute, value) {
@@ -765,9 +800,10 @@ angular
             /**
              * Validate an attribute is contained within a list of values.
              *
-             * @param  {String}  attribute
-             * @param  {Mixed}   value
-             * @param  {Array}   parameters
+             * @param {String} attribute
+             * @param {Mixed}  value
+             * @param {Array}  parameters
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateIn = function (attribute, value, parameters) {
@@ -777,9 +813,10 @@ angular
             /**
              * Validate an attribute is not contained within a list of values.
              *
-             * @param  {String}  attribute
-             * @param  {Mixed}   value
-             * @param  {Array}   parameters
+             * @param {String} attribute
+             * @param {Mixed}  value
+             * @param {Array}  parameters
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateNotIn = function (attribute, value, parameters) {
@@ -789,8 +826,9 @@ angular
             /**
              * Validate that an attribute is an integer.
              *
-             * @param  {String}  attribute
-             * @param  {Mixed}   value
+             * @param {String} attribute
+             * @param {Mixed}  value
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateInteger = function (attribute, value) {
@@ -800,8 +838,9 @@ angular
             /**
              * Validate that an attribute is numeric.
              *
-             * @param  {String}   attribute
-             * @param  {Mixed}    value
+             * @param {String} attribute
+             * @param {Mixed}  value
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateNumeric = function (attribute, value) {
@@ -811,9 +850,10 @@ angular
             /**
              * Validate the size of an attribute is between a set of values.
              *
-             * @param  {String}  attribute
-             * @param  {Mixed}   value
-             * @param  {Array}   parameters
+             * @param {String} attribute
+             * @param {Mixed}  value
+             * @param {Array}  parameters
+             *
              * @return {Boolean}
              */
             Validator.prototype.validateBetween = function (attribute, value, parameters) {
@@ -827,10 +867,12 @@ angular
             /**
              * Require a certain number of parameters to be present.
              *
-             * @param  {Int}     count
-             * @param  {Array}   parameters
-             * @param  {String}  rule
+             * @param {Integer} count
+             * @param {Array}   parameters
+             * @param {String}  rule
+             *
              * @return {undefined}
+             *
              * @throws {Error}
              */
             Validator.prototype.requireParameterCount = function (count, parameters, rule) {
@@ -842,17 +884,19 @@ angular
             /**
              * Get the size of an attribute.
              *
-             * @param  {String}  attribute
-             * @param  {Mixed}   value
+             * @param {String} attribute
+             * @param {Mixed}  value
+             *
              * @return {Mixed}
              */
             Validator.prototype.getSize = function (attribute, value) {
                 var hasNumeric = this.hasRule(attribute, this.numericRules);
 
-                // This method will determine if the attribute is a number, string, or file and
-                // return the proper size accordingly. If it is a number, then number itself
-                // is the size. If it is a file, we take kilobytes, and for a string the
-                // entire length of the string will be considered the attribute size.
+                // This method will determine if the attribute is a number,
+                // string, or file and return the proper size accordingly. If
+                // it is a number, then number itself is the size. If it is a
+                // file, we take kilobytes, and for a string the entire length
+                // of the string will be considered the attribute size.
                 if (!isNaN(value) && hasNumeric) {
                     return this.data[attribute];
                 } else if (Array.isArray(value)) {
@@ -865,8 +909,9 @@ angular
             /**
              * Get the size of a string.
              *
-             * @param  {String}  value
-             * @return {Int}
+             * @param {String} value
+             *
+             * @return {Integer}
              */
             Validator.prototype.getStringSize = function (value) {
                 if (value) {
@@ -879,8 +924,9 @@ angular
             /**
              * Determine if the given attribute has a rule in the given set.
              *
-             * @param  {String}          attribute
-             * @param  {String|Object}   rules
+             * @param {String}        attribute
+             * @param {String|Object} rules
+             *
              * @return {Boolean}
              */
             Validator.prototype.hasRule = function (attribute, rules) {
@@ -890,8 +936,9 @@ angular
             /**
              * Get a rule and its parameters for a given attribute.
              *
-             * @param  {String}         attribute
-             * @param  {String|Object}  rules
+             * @param {String}        attribute
+             * @param {String|Object} rules
+             *
              * @return {Object|undefined}
              */
             Validator.prototype.getRule = function (attribute, rules) {
@@ -911,21 +958,24 @@ angular
             /**
              * Get the displayable name of the attribute.
              *
-             * @param  {String}  attribute
+             * @param {String} attribute
+             *
              * @return {String}
              */
             Validator.prototype.getAttribute = function (attribute) {
-                // The developer may dynamically specify the array of custom attributes
-                // on this Validator instance. If the attribute exists in this array
-                // it takes precedence over all other ways we can pull attributes.
+                // The developer may dynamically specify the array of custom
+                // attributes on this Validator instance. If the attribute
+                // exists in this array it takes precedence over all other
+                // ways we can pull attributes.
                 if (this.customAttributes[attribute]) {
                     return this.customAttributes[attribute];
                 }
 
                 var key = 'attributes.' + attribute;
-                // We allow for the developer to specify language messages for each of the
-                // attributes allowing for more displayable counterparts of each of
-                // the attributes. This provides the ability for simple formats.
+                // We allow for the developer to specify language messages for
+                // each of the attributes allowing for more displayable
+                // counterparts of each of the attributes. This provides the
+                // ability for simple formats.
 
                 var message = ValidationTranslator.trans(key)
 
@@ -933,16 +983,18 @@ angular
                     return message;
                 }
 
-                // If no language message has been specified for the attribute all of the
-                // underscores are removed from the attribute name and that will be
-                // used as default versions of the attribute's displayable names.
+                // If no language message has been specified for the attribute
+                // all of the underscores are removed from the attribute name
+                // and that will be used as default versions of the
+                // attribute's displayable names.
                 return snakeCase(attribute).replace(/_/g, ' ');
             };
 
             /**
              * Get the data type of the given attribute.
              *
-             * @param  {String}  attribute
+             * @param {String} attribute
+             *
              * @return {String}
              */
             Validator.prototype.getAttributeType = function (attribute) {
@@ -958,15 +1010,17 @@ angular
             /**
              * Transform an array of attributes to their displayable form.
              *
-             * @param  {Array}  values
+             * @param {Array} values
+             *
              * @return {Array}
              */
             Validator.prototype.getAttributeList = function (values) {
                 var attributes = [];
 
-                // For each attribute in the list we will simply get its displayable form as
-                // this is convenient when replacing lists of parameters like some of the
-                // replacement functions do when formatting out the validation message.
+                // For each attribute in the list we will simply get its
+                // displayable form as this is convenient when replacing lists
+                // of parameters like some of the replacement functions do
+                // when formatting out the validation message.
                 for (var i = 0; i < values.length; i++) {
                     attributes.push(this.getAttribute(values[i]));
                 };
@@ -977,8 +1031,9 @@ angular
             /**
              * Get the displayable name of the value.
              *
-             * @param  {String}  attribute
-             * @param  {Mixed}   value
+             * @param {String} attribute
+             * @param {Mixed}  value
+             *
              * @return {String}
              */
             Validator.prototype.getDisplayableValue = function (attribute, value) {
@@ -1000,10 +1055,11 @@ angular
             /**
              * Replace all place-holders for the between rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceBetween = function (message, attribute, rule, parameters) {
@@ -1013,10 +1069,11 @@ angular
             /**
              * Replace all place-holders for the size rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceSize = function (message, attribute, rule, parameters) {
@@ -1026,10 +1083,11 @@ angular
             /**
              * Replace all place-holders for the min rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceMin = function (message, attribute, rule, parameters) {
@@ -1039,10 +1097,11 @@ angular
             /**
              * Replace all place-holders for the max rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceMax = function (message, attribute, rule, parameters) {
@@ -1052,10 +1111,11 @@ angular
             /**
              * Replace all place-holders for the in rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceIn = function (message, attribute, rule, parameters) {
@@ -1069,10 +1129,11 @@ angular
             /**
              * Replace all place-holders for the not_in rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceNotIn = function (message, attribute, rule, parameters) {
@@ -1082,10 +1143,11 @@ angular
             /**
              * Replace all place-holders for the required_with rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceRequiredWith = function (message, attribute, rule, parameters) {
@@ -1096,10 +1158,11 @@ angular
             /**
              * Replace all place-holders for the required_without rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceRequiredWithout = function (message, attribute, rule, parameters) {
@@ -1109,10 +1172,11 @@ angular
             /**
              * Replace all place-holders for the required_without_all rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceRequiredWithoutAll = function (message, attribute, rule, parameters) {
@@ -1122,10 +1186,11 @@ angular
             /**
              * Replace all place-holders for the required_if rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceRequiredIf = function (message, attribute, rule, parameters) {
@@ -1138,10 +1203,11 @@ angular
             /**
              * Replace all place-holders for the same rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceSame = function (message, attribute, rule, parameters) {
@@ -1151,10 +1217,11 @@ angular
             /**
              * Replace all place-holders for the different rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceDifferent = function (message, attribute, rule, parameters) {
@@ -1164,10 +1231,11 @@ angular
             /**
              * Replace all place-holders for the date_format rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceDateFormat = function (message, attribute, rule, parameters) {
@@ -1177,10 +1245,11 @@ angular
             /**
              * Replace all place-holders for the before rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceBefore = function (message, attribute, rule, parameters) {
@@ -1193,10 +1262,11 @@ angular
             /**
              * Replace all place-holders for the after rule.
              *
-             * @param  {String}  message
-             * @param  {String}  attribute
-             * @param  {String}  rule
-             * @param  {Array}   parameters
+             * @param {String} message
+             * @param {String} attribute
+             * @param {String} rule
+             * @param {Array}  parameters
+             *
              * @return {String}
              */
             Validator.prototype.replaceAfter = function (message, attribute, rule, parameters) {
@@ -1208,9 +1278,10 @@ angular
              */
 
             /**
-             * Function to convert each word`s first letter to upper case.
+             * Convert each word`s first letter to upper case.
              *
-             * @param  {String}  str
+             * @param {String} str
+             *
              * @return {String}
              */
             function ucwords(str) {
@@ -1232,9 +1303,10 @@ angular
             };
 
             /**
-             * Function to convert text into studly case.
+             * Convert text into studly case.
              *
-             * @param  {String}  str
+             * @param {String} str
+             *
              * @return {String}
              */
             function studlyCase(str) {
@@ -1243,15 +1315,30 @@ angular
             };
 
             /**
-             * Function to convert text into snake case.
+             * Convert text into snake case.
              *
-             * @param  {String}  str
+             * @param {String} str
+             *
              * @return {String}
              */
             function snakeCase(str) {
                 return (str + '').replace(/(.)([A-Z])/g, '$1_$2').toLowerCase();
             };
 
+            /**
+             * Replace placeholders with object keys
+             *
+             * @example
+             * // returns 'Dear Andrew'
+             * var str = ":greet :name"
+             * var greet = {greet: 'Dear', name: 'Andrew'};
+             * replace(str, greet);
+             *
+             * @param {String} str  String contaiing placeholders
+             * @param {Object} data Object with corresponding keys
+             *
+             * @return {String} Final string with replaced placeholders
+             */
             function replace(str, data) {
                 return str.replace(/:([A-z]*)/g,
                     function (a, b) {

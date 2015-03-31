@@ -34,8 +34,8 @@ angular
             "required_without": "The :attribute field is required when :values is not present.",
             "required_without_all": "The :attribute field is required when none of :values are present.",
 
-            // Developers can set custom validation messages on some attributes
-            // validation rules
+            // Developers can set custom validation messages on some
+            // attributes validation rules
             "custom": {
                 "attribute-name": {
                     "rule-name": "custom-message",
@@ -47,8 +47,8 @@ angular
                 "email": "Email address",
             },
 
-            // As an example just set displayable value for colors attribute and
-            // its values
+            // As an example just set displayable value for colors attribute
+            // and its values
             "values": {
                 "colors": {
                     "F00": "Red",
@@ -66,6 +66,7 @@ angular
              * @param  {String}  key
              * @param  {Object}  parameters
              * @param  {String}  locale
+             *
              * @return {String}
              */
             this.trans = function trans(key, parameters, locale) {
@@ -81,6 +82,7 @@ angular
              * @param  {String}  key
              * @param  {Object}  replace
              * @param  {String}  locale
+             *
              * @return {String}
              */
             this.get = function get(key, replace, locale) {
@@ -110,6 +112,7 @@ angular
              * @param  {String}  locale
              * @param  {String}  key
              * @param  {Object}  replace
+             *
              * @return {String|undefined}
              */
             this.getMessage = function getMessage(locale, key, replace) {
@@ -139,6 +142,7 @@ angular
              * Get the array of locales to be checked.
              *
              * @param  {String|null}  locale
+             *
              * @return {Array}
              */
             this.parseLocale = function parseLocale(locale) {
