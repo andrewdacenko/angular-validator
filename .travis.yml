@@ -11,7 +11,5 @@ cache:
 install:
   # Check the size of caches
   - du -sh ./node_modules ./bower_components/ || true
-  # Log HTTP requests
-  - npm config set loglevel http
   # Instal npm dependecies and ensure that npm cache is not stale
   - npm install

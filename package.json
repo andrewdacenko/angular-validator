@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/andrewdacenko/ng-validator",
   "dependencies": {
+    "bower": "latest",
     "del": "^1.1.1",
     "gulp": "^3.8.10",
     "gulp-concat": "^2.4.3",
