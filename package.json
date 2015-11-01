@@ -4,7 +4,8 @@
   "description": "Angular validation helper class",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "gulp test"
+    "install": "bower install",
+    "test": "karma start --single-run"
   },
   "repository": {
     "type": "git",

@@ -1,1 +1,17 @@
 language: node_js
+sudo: false
+node_js:
+  - '4.1'
+
+cache:
+  directories:
+    - node_modules
+    - bower_components
+
+install:
+  # Check the size of caches
+  - du -sh ./node_modules ./bower_components/ || true
+  # Log HTTP requests
+  - npm config set loglevel http
+  # Instal npm dependecies and ensure that npm cache is not stale
+  - npm install
