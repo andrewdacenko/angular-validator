@@ -1,4 +1,7 @@
 # ng-validator
+
+[![Build Status](https://img.shields.io/travis/andrewdacenko/ng-validator/master.svg?style=flat-square)](https://travis-ci.org/andrewdacenko/ng-validator) 
+
 Angular validation helper class
 
 # How to install
@@ -18,18 +21,18 @@ Inject in Controller / Service / Whatever
 AppController.$inject = ['Validator'];
 
 function AppController (Validator) {
-  var self = this;
+  var vm = this;
   
-  self.input = {
-    title: '',
-    description: '',
-    agree: null,
-    reason: ''
-  };
-  
-  self.errors = {};
-  
-  self.submit = submit;
+  angular.extend(vm, { 
+    input: {
+      title: '',
+      description: '',
+      agree: null,
+      reason: ''
+    },
+    errors: {},
+    submit: submit
+   }
   
   var rules = {
     title: 'required',
@@ -45,7 +48,7 @@ function AppController (Validator) {
   }
 
   function submit() {
-    self.errors = {};
+    vm.errors = {};
     
     var validator = new Validator(self.input, rules, customMessages);
     
@@ -60,12 +63,12 @@ function AppController (Validator) {
 
 Show errors in template
 ```html
-<div ng-controller="AppController as app">
-  <form ng-submit="app.submit()">
-    <div class="form-group" ng-class="{'has-error': app.errors.title}">
+<div ng-controller="AppController as appCtrl">
+  <form ng-submit="appCtrl.submit()">
+    <div class="form-group" ng-class="{'has-error': appCtrl.errors.title}">
       <label class="form-label">Title</label>
-      <input class="form-control" ng-model="app.input.title" />
-      <span class="help-block" ng-if="app.errors.title" ng-bind="app.errors.title">
+      <input class="form-control" ng-model="appCtrl.input.title" />
+      <span class="help-block" ng-if="appCtrl.errors.title" ng-bind="appCtrl.errors.title">
     </div>
     <button class="btn btn-primary">Submit</button>
   </form>
@@ -106,5 +109,5 @@ Create template
 
 And use as
 ```html
-<input-validation parent="app" field="title"></input-validation>
+<input-validation parent="appCtrl" field="title"></input-validation>
 ```
