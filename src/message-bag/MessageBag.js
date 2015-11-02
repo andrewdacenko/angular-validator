@@ -7,8 +7,12 @@
 
     function MessageBagFactory() {
 
+        setErrorsBagPrototype();
+
+        return MessageBag;
+
         function MessageBag() {
-            var bag = new MessageBagContainer;
+            var bag = new ErrorsBag;
 
             angular.extend(this, {
                 add: bag.add.bind(bag),
@@ -21,92 +25,92 @@
         }
 
         /**
-         * Create a new MessageBagContainer
+         * Create a new ErrorsBag
          *
          * @constructor
          */
-        function MessageBagContainer() {
+        function ErrorsBag() {
             this.errors = {};
         }
 
-        /**
-         * Add new error on field validation.
-         *
-         * @param   {string} field
-         * @param   {string} message
-         */
-        MessageBagContainer.prototype.add = function add(field, message) {
-            if (!(this.errors[field] instanceof Array)) {
-                this.errors[field] = [];
-            }
-
-            this.errors[field].push(message);
-        };
-
-        /**
-         * Check if there are any errors.
-         *
-         * @returns {boolean}
-         */
-        MessageBagContainer.prototype.hasErrors = function hasErrors() {
-            for (var prop in this.errors) {
-                /* istanbul ignore else */
-                if (this.errors.hasOwnProperty(prop)) {
-                    return true;
+        function setErrorsBagPrototype() {
+            /**
+             * Add new error on field validation.
+             *
+             * @param   {string} field
+             * @param   {string} message
+             */
+            ErrorsBag.prototype.add = function add(field, message) {
+                if (!(this.errors[field] instanceof Array)) {
+                    this.errors[field] = [];
                 }
-            }
 
-            return false;
-        };
+                this.errors[field].push(message);
+            };
 
-        /**
-         * Get all errors.
-         *
-         * @returns {Object}
-         */
-        MessageBagContainer.prototype.all = function all() {
-            return angular.copy(this.errors);
-        };
+            /**
+             * Check if there are any errors.
+             *
+             * @returns {boolean}
+             */
+            ErrorsBag.prototype.hasErrors = function hasErrors() {
+                for (var prop in this.errors) {
+                    /* istanbul ignore else */
+                    if (this.errors.hasOwnProperty(prop)) {
+                        return true;
+                    }
+                }
 
-        /**
-         * Check if there are errors at field.
-         *
-         * @param   {string}  field
-         * @returns {boolean}
-         */
-        MessageBagContainer.prototype.has = function has(field) {
-            return this.errors[field] ? true : false;
-        };
+                return false;
+            };
 
-        /**
-         * Get first error at field.
-         *
-         * @param   {string}  field
-         * @returns {string}
-         */
-        MessageBagContainer.prototype.first = function first(field) {
-            if (this.has(field)) {
-                return this.errors[field][0];
-            }
+            /**
+             * Get all errors.
+             *
+             * @returns {Object}
+             */
+            ErrorsBag.prototype.all = function all() {
+                return angular.copy(this.errors);
+            };
 
-            return '';
-        };
+            /**
+             * Check if there are errors at field.
+             *
+             * @param   {string}  field
+             * @returns {boolean}
+             */
+            ErrorsBag.prototype.has = function has(field) {
+                return this.errors[field] ? true : false;
+            };
 
-        /**
-         * Get all the field errors.
-         *
-         * @param   {string}  field
-         * @returns {Object}
-         */
-        MessageBagContainer.prototype.get = function get(field) {
-            if (this.has(field)) {
-                return this.errors[field];
-            }
+            /**
+             * Get first error at field.
+             *
+             * @param   {string}  field
+             * @returns {string}
+             */
+            ErrorsBag.prototype.first = function first(field) {
+                if (this.has(field)) {
+                    return this.errors[field][0];
+                }
 
-            return [];
-        };
+                return '';
+            };
 
-        return MessageBag;
+            /**
+             * Get all the field errors.
+             *
+             * @param   {string}  field
+             * @returns {Object}
+             */
+            ErrorsBag.prototype.get = function get(field) {
+                if (this.has(field)) {
+                    return this.errors[field];
+                }
+
+                return [];
+            };
+        }
     }
 
 })();
