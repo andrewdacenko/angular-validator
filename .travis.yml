@@ -1,12 +1,29 @@
 language: node_js
 sudo: false
 node_js:
-  - '4.1'
+  - '0.12'
+  - '4'
+  - '5'
+
+env:
+  global:
+  - CXX=g++-4.8
 
 cache:
   directories:
     - node_modules
     - bower_components
+
+before_install:
+  - npm config set loglevel warn
+  - g++-4.8 --version
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 
 install:
   # Check the size of caches
